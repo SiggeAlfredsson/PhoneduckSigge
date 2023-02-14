@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class ChannelService {
 
-
     @Autowired
     private JpaChannelRepository jpaChannelRepository;
 
@@ -19,7 +18,7 @@ public class ChannelService {
     }
 
     public List<Channel> getAll() {
-        return jpaChannelRepository.findAll(); // SELECT * FROM course;
+        return jpaChannelRepository.findAll();
     }
 
     public void delete(long channelId) {

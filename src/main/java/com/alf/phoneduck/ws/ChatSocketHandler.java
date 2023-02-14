@@ -46,7 +46,7 @@ public class ChatSocketHandler extends TextWebSocketHandler {
         for (Map.Entry<String, List<String>> entry : session.getHandshakeHeaders().entrySet()) {
             String headerKey = entry.getKey();
 
-            if (isNumeric(headerKey)) { //inte super nöjd här, bla att value e hårdkodat + ej används
+            if (isNumeric(headerKey)) { //rörigt, städa?
                 session.getAttributes().put("key", headerKey);
                 broadcast(headerKey,  message.getPayload());
                 Message newMessage = new Message();
@@ -64,7 +64,6 @@ public class ChatSocketHandler extends TextWebSocketHandler {
         try {
             for (WebSocketSession webSession : sessions) {
                 String sessionKey = (String) webSession.getAttributes().get("key");
-                System.out.println(sessionKey);
                 if (sessionKey != null && sessionKey.equals(key)) {
                     webSession.sendMessage(new TextMessage("New message: " + message));
                 }
@@ -78,14 +77,14 @@ public class ChatSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
-        //inte super nöjd här..
+        //också väldigt rörigt, städa?
 
         List<Channel> channels = channelService.getAll();
 
         TextMessage welcomeMessage = new TextMessage("Welcome! Here are all the active channels!");
         session.sendMessage(welcomeMessage);
 
-        String connectedMessageString = "You are currently connected to the following channels: ";
+        String connectedMessageString = "You are currently connected to the following channels: "; //does not work with sub/channel (yet).
 
         for (Map.Entry<String, List<String>> entry : session.getHandshakeHeaders().entrySet()) {
             String headerKey = entry.getKey();
@@ -109,7 +108,6 @@ public class ChatSocketHandler extends TextWebSocketHandler {
         }
 
             sessions.add(session);
-            System.out.println("New session created");
 
         }
 
@@ -117,6 +115,5 @@ public class ChatSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         sessions.remove(session);
-        System.out.println("Session was removed");
     }
 }

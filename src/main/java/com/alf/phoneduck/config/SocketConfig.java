@@ -21,8 +21,6 @@ public class SocketConfig implements WebSocketConfigurer {
     @Autowired
     private UserSocketHandler userSocketHandler;
 
-
-
     @Autowired
     private ChatSocketHandler chatSocketHandler;
 
@@ -31,14 +29,11 @@ public class SocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(userSocketHandler, SOCKET_PREFIX + "/user/state");
-        //registry.addHandler(chatSocketHandler, SOCKET_PREFIX +  "/channel");
         registry.addHandler(chatSocketHandler, SOCKET_PREFIX + "/chat");
-
         registry.addHandler(chatSocketHandler, SOCKET_PREFIX + "/channel")
                 .addInterceptors(new HandshakeInterceptor() {
                     @Override
                     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-                        // Set the default key value to 1
                         attributes.put("key", "1");
                         return true;
                     }

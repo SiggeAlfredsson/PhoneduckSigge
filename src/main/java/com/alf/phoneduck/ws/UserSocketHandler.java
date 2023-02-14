@@ -15,8 +15,6 @@ public class UserSocketHandler extends TextWebSocketHandler {
 
     private List<WebSocketSession> sessions = new ArrayList<>();
 
-
-
     public void broadcast(String channel, String message) {
         try {
             for (WebSocketSession webSession : sessions) { // broadcast
@@ -35,12 +33,10 @@ public class UserSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.add(session);
-        System.out.println("New session created");
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         sessions.remove(session);
-        //System.out.println("Session was removed");
     }
 }
