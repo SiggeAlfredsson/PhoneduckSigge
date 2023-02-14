@@ -25,7 +25,7 @@ public class PhoneduckApplication {
 
             Channel channel = new Channel();
             channel.setName("Permanent Channel");
-            channel.setDescription("Channel to advertise other channels for users to subscribe to");
+            channel.setDescription("Channel to advertise other channels for users to subscribe to. All new channels is shown here at creation.");
             jpaChannelRepository.save(channel);
 
         };

@@ -1,8 +1,5 @@
 package com.alf.phoneduck.ws;
 
-import com.alf.phoneduck.model.User;
-import com.alf.phoneduck.model.UserStateDetails;
-import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -14,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class UserStateSocketHandler extends TextWebSocketHandler {
+public class UserSocketHandler extends TextWebSocketHandler {
 
     private List<WebSocketSession> sessions = new ArrayList<>();
 

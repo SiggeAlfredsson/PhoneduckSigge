@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 
 @Getter
@@ -21,10 +22,13 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String senderUsername;
-    private String message;
 
-    //private LocalDate sendAtDate;
-    //private LocalTime sendTimeStamp;
+    private String message;
+    private long channelId;
+    private Date createdAt;
+    private LocalTime sentAtTimeStamp;
+
+    //private String senderUsername;
+
 
 }

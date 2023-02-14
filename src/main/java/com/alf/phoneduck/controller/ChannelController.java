@@ -2,7 +2,8 @@ package com.alf.phoneduck.controller;
 
 import com.alf.phoneduck.model.Channel;
 import com.alf.phoneduck.service.ChannelService;
-import com.alf.phoneduck.ws.ChannelStateSocketHandler;
+
+import com.alf.phoneduck.ws.ChatSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.util.List;
 public class ChannelController {
 
     @Autowired
-    private ChannelStateSocketHandler channelStateSocketHandler;
+    private ChatSocketHandler chatSocketHandler;
 
     @Autowired
     private ChannelService channelService;
@@ -36,7 +37,8 @@ public class ChannelController {
     public ResponseEntity<List<Channel>> createChannel(@RequestBody Channel channel) {
         channelService.save(channel);
 
-        channelStateSocketHandler.broadcast("new-channel", "A new channel was created, name: " + channel.getName() + ". Description: " + channel.getDescription());
+        chatSocketHandler.broadcast("1", "chat", "A new channel was created, Id: "
+                        + channel.getId() + ". name: " + channel.getName() + ". Description: " + channel.getDescription());
 
         List<Channel> channels = channelService.getAll();
         return ResponseEntity.status(201).body(channels);

@@ -2,7 +2,7 @@ package com.alf.phoneduck.controller;
 
 import com.alf.phoneduck.model.User;
 import com.alf.phoneduck.service.UserService;
-import com.alf.phoneduck.ws.UserStateSocketHandler;
+import com.alf.phoneduck.ws.UserSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserStateSocketHandler userStateSocketHandler;
+    private UserSocketHandler userSocketHandler;
 
     @Autowired
     private UserService userService;
@@ -38,7 +38,7 @@ public class UserController {
     @PutMapping("user")
     public ResponseEntity<List<User>> createUser(@RequestBody User user) {
         userService.save(user);
-        userStateSocketHandler.broadcast("new-user", "A new user was created, username :" + user.getUsername() + ".");
+        userSocketHandler.broadcast("new-user", "A new user was created, username :" + user.getUsername() + ".");
         return getAllUsers();
     }
 
@@ -65,9 +65,9 @@ public class UserController {
 
         // broadcast student changes
         if(newUser.isOnline()) {
-            userStateSocketHandler.broadcast("online", newUser.getUsername() + " is now online");
+            userSocketHandler.broadcast("online", newUser.getUsername() + " is now online");
         } else {
-            userStateSocketHandler.broadcast("offline", newUser.getUsername() + " is now offline");
+            userSocketHandler.broadcast("offline", newUser.getUsername() + " is now offline");
         }
     }
 }
