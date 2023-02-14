@@ -1,3 +1,6 @@
+Detta är lite som det är, vart sjuk lite de senaste också så hamlade lite efter men tror ändå det ska funka? Blev klar 16:59 så inte hunnit testa så mycket hehe.
+
+
 # PhoneduckSigge
 School assignment
 
@@ -16,7 +19,7 @@ DELETE  ! http://localhost:8080/channel/(id)  ! To delete a channel by id.
 What to fix !
 
 
-Socket message does not send to all the channels you are connected to ( you do still get receive all messages ),
+Socket message does not send to all the channels you are connected to ( you do still get receive all messages ), (works sometimes and sometimes dont? what, me confused)
 
 spring.jpa.hibernate.ddl-auto=create-drop --> update . Created weird bug where the id of the channel got way to large,
 
