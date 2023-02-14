@@ -37,7 +37,7 @@ public class ChannelController {
     public ResponseEntity<List<Channel>> createChannel(@RequestBody Channel channel) {
         channelService.save(channel);
 
-        chatSocketHandler.broadcast("1", "chat", "A new channel was created, Id: "
+        chatSocketHandler.broadcast("1",  "A new channel was created, Id: "
                         + channel.getId() + ". name: " + channel.getName() + ". Description: " + channel.getDescription());
 
         List<Channel> channels = channelService.getAll();

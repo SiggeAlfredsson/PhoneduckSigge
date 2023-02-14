@@ -46,8 +46,9 @@ public class ChatSocketHandler extends TextWebSocketHandler {
         for (Map.Entry<String, List<String>> entry : session.getHandshakeHeaders().entrySet()) {
             String headerKey = entry.getKey();
 
-            if (isNumeric(headerKey)) { //inte super nöjd här, bla att value e hårdkodat
-                broadcast(headerKey, "chat", message.getPayload());
+            if (isNumeric(headerKey)) { //inte super nöjd här, bla att value e hårdkodat + ej används
+                session.getAttributes().put("key", headerKey);
+                broadcast(headerKey,  message.getPayload());
                 Message newMessage = new Message();
                 newMessage.setMessage(message.getPayload());
                 newMessage.setChannelId(Long.parseLong(headerKey));
@@ -59,13 +60,14 @@ public class ChatSocketHandler extends TextWebSocketHandler {
         }
     }
 
-    public void broadcast( String key,String value, String message) {
-
+    public void broadcast(String key,  String message) {
         try {
-            for (WebSocketSession webSession : sessions) { // satt i typ 4 timmar med att få key och values att funka tills jag insåg att det inte var nödvändigt -.-
-
+            for (WebSocketSession webSession : sessions) {
+                String sessionKey = (String) webSession.getAttributes().get("key");
+                System.out.println(sessionKey);
+                if (sessionKey != null && sessionKey.equals(key)) {
                     webSession.sendMessage(new TextMessage("New message: " + message));
-
+                }
             }
         } catch(IOException ex) {
             ex.printStackTrace();
