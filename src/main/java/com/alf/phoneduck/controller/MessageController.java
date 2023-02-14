@@ -1,4 +1,4 @@
 package com.alf.phoneduck.controller;
 
-public class ChatController {
+public class MessageController {
 }

@@ -8,14 +8,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 
 @Getter
 @Setter
 @Entity
-public class ChatMessage {
+public class Message {
 
 
     @Id
@@ -23,10 +22,9 @@ public class ChatMessage {
     private long id;
 
     private String senderUsername;
-    private LocalDate sendAtDate;
-    private LocalTime sendTimeStamp;
-
     private String message;
 
+    //private LocalDate sendAtDate;
+    //private LocalTime sendTimeStamp;
 
 }

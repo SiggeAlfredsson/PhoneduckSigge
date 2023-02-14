@@ -21,8 +21,8 @@ public class Channel {
 
     private String name;
     private String description;
-    private int members;
-    private int onlineMembers;
-    private LocalDate createdAtDate;
+    //private int members;
+    //private int onlineMembers;
+    //private LocalDate createdAtDate;
 
 }
